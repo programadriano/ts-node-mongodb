@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as morgan from "morgan";
 import * as bodyParser from "body-parser";
-//import DataBase from './config/db';
+import DataBase from './config/db';
 
 //Routes
 
@@ -14,13 +14,13 @@ class App {
     public app: express.Application;
     private morgan: morgan.Morgan;
     private bodyParser;
-    // private database: DataBase;
+    private database: DataBase;
 
     constructor() {
         this.app = express();
         this.enableCors();
         this.middleware();
-        // this.database = new DataBase();
+        this.database = new DataBase();
         this.dataBaseConnection();
         this.routes();
     }
@@ -38,11 +38,11 @@ class App {
     }
 
     dataBaseConnection() {
-        //  this.database.createConnection();
+        this.database.createConnection();
     }
 
     closedataBaseConnection(message, callback) {
-        //this.database.closeConnection(message, () => callback());
+        this.database.closeConnection(message, () => callback());
     }
 
     middleware() {
